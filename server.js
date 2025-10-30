@@ -107,10 +107,8 @@ app.post("/api/users", (req, res) => {
     return res.status(400).json({ error: "Name and email required" });
   }
 
-  db.query(
-    "INSERT INTO users_details (name, email) VALUES (?, ?)",
-    [name, email],
-    (err) => {
+  db.query("INSERT INTO users (id, name, email) VALUES (NULL, ?, ?)", [name, email], (err) => 
+{
       if (err) return res.status(500).json({ error: err.message });
       res.json({ message: "✅ User added successfully!" });
     }
